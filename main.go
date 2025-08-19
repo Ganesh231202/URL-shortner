@@ -48,10 +48,17 @@ func getURL(id string) (URL, error) {
 	}
 	return url, nil
 }
+
+func handler(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("GET method")
+
+}
 func main() {
 	fmt.Println("Url Shortener Service")
 	OrininalURL := "https://www.example.com/some/long/url"
 	createShortURL(OrininalURL)
+	// Handler function to handle incoming requests
+	http.HandleFunc("/", handler)
 
 	fmt.Println("Starting server on port 8080..")
 	err := http.ListenAndServe(":8080", nil)
