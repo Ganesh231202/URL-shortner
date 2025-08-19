@@ -27,6 +27,26 @@ func createShortURL(OriginalURL string) string {
 	fmt.Println("final String", hash[:8])
 	return "www.example.com/some/long/url"
 }
+
+func createURL(originalURL string) string {
+	shortURL := createShortURL(originalURL)
+	id := shortURL
+	urlDB[id] = URL{
+		ID:          id,
+		OriginalURL: originalURL,
+		ShortURl:    shortURL,
+		CreatinDate: time.Now(),
+	}
+	return shortURL
+}
+
+func getURL(id string) (URL, error) {
+	url, ok := urlDB[id]
+	if !ok {
+		return URL{}, fmt.Errorf("URL not found")
+	}
+	return url, nil
+}
 func main() {
 	fmt.Println("Url Shortener Service")
 	OrininalURL := "https://www.example.com/some/long/url"
