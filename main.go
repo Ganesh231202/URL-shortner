@@ -4,6 +4,7 @@ import (
 	"crypto/md5"
 	"encoding/hex"
 	"fmt"
+	"net/http"
 	"time"
 )
 
@@ -51,4 +52,11 @@ func main() {
 	fmt.Println("Url Shortener Service")
 	OrininalURL := "https://www.example.com/some/long/url"
 	createShortURL(OrininalURL)
+
+	fmt.Println("Starting server on port 8080..")
+	err := http.ListenAndServe(":8080", nil)
+	if err != nil {
+		fmt.Println("Error starting server:", err)
+		return
+	}
 }
